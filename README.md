@@ -1,100 +1,133 @@
-# Insurance Portfolio Performance Analysis
-### Excel | Portfolio Performance Reporting 
+# INSURANCE PORTFOLIO PERFORMANCE ANALYSIS
 
-An analysis of policy-level insurance information to understand insured value, portfolio composition, geographic concentration, and policy expiry patterns.
+Excel-based analysis of policy distribution, insured exposure, coverage indicators, premiums and paid losses for 2021 Policy Dataset
 
-## 📊 Project at a Glance
+## 1 | Business context and analytical objective
 
-| Area | Project Details |
+This project examines a 500-policy insurance dataset to show where insured value is concentrated, how the portfolio is distributed, coverage indicators, and how collected premiums compare with recorded paid losses. The aim is to turn policy-level information into clear management reporting that can support portfolio performance monitoring.
+
+## 2 | Project at a Glance
+
+| Area | Project overview |
 | :--- | :--- |
-| **Data Source** | `Insurance Policies Data.xlsx` (500 unique policy records) |
-| **Tools** | Microsoft Excel (Workbook summary tables, charts, KPI reporting, and dashboard construction) |
-| **Scope** | Policy value, geography, business type, construction type, expiry dates, and earthquake/flood risk indicators |
-| **Portfolio Measures** | 500 policies &middot; $2,482,205,481 total recorded insured value &middot; 10 US states |
-| **Reporting Audience** | Insurance portfolio, underwriting, risk management, and operational reporting teams |
+| **Business focus** | Insurance portfolio performance, insured-value exposure, coverage distribution, claims experience and policy expiry analysis. |
+| **Tools** | Microsoft Excel – Excel Tables, formulas, PivotTables, Pivot Charts, calculated fields and dashboard reporting. |
+| **Data structure** | 500 insurance policy records containing insured values, premiums, losses paid, business types, construction types, geographical regions, policy expiry dates, and flood and earthquake coverage indicators. |
+| **Key metrics and KPIs** | Policy count, total insured value, total premiums, total losses paid, paid-loss ratio, coverage distribution and exposure concentration. |
+| **Currency** | Pound sterling (GBP, £) – all financial values, including insured values, premiums and losses paid, are reported in pounds. |
+| **Reporting scope** | Analysis of 500 policies, including regional and business-type comparisons, coverage combinations, financial performance and historical policy expiry patterns. |
+| **Analysis Period** | 2021 (January–December) – analysis of 500 insurance policies with expiry dates within the 2021 calendar year. |
+| **Output** | Interactive Excel dashboard with Pivot Table summaries, charts and KPI reporting to support portfolio monitoring, risk assessment and management decision-making. |
 
----
+## 3 | Business questions
 
-## 1. Business Context & Purpose
-Insurance portfolio reporting consolidates raw policy information to help leadership teams evaluate the value and mix of the insured book. Analysing geographic concentration, property characteristics, and upcoming expiries directly supports management reviews, resource planning, and renewal prioritization.
+| Question | Analytical output |
+| :--- | :--- |
+| Where is the insured exposure concentrated? | Policy count and insured value by region, state and location. |
+| Which types of business and construction account for the largest exposure? | Exposure distribution by business type, construction and combined category. |
+| How are earthquake and flood indicators distributed? | Counts and insured values for both, either or neither indicator. |
+| How do premium and paid-loss results compare across groups? | Premium, paid losses and portfolio paid-loss ratio, segmented by region or construction. |
+| When do policies expire? | Monthly policy counts for the 2021 expiry period. |
+| Which individual policies warrant closer review? | Largest insured values and unusually high individual paid-loss ratios. |
 
-**The project structures a policy-level dataset into an operational report to answer:**
-* Where is the overall insured value geographically concentrated?
-* Which property and business categories account for the largest financial share?
-* How are construction types distributed across the book?
-* When are policies due to expire throughout the year?
+## 4 | Metrics and KPIs
 
----
+| Measure | Definition / interpretation | Recorded value |
+| :--- | :--- | :--- |
+| **Policy count** | Distinct policy identifiers in the source table. | 500 |
+| **Total insured value** | Sum of Insured Value; a measure of stated exposure, not claim cost. | 2,482,205,481 |
+| **Average insured value** | Total insured value ÷ 500 policies. | 4,964,411 |
+| **Premium** | Sum of recorded premium across policies. | 11,315,760.90 |
+| **Paid loss** | Sum of populated Loss Paid amounts; blanks are not independently verified as zero. | 7,249,785.94 |
+| **Portfolio paid-loss ratio** | Sum of recorded paid losses ÷ sum of premium (not the mean policy ratio). | 64.07% |
+| **Coverage distribution** | Share of policy count or insured value by coverage category. | See section 6 |
+| **Top 10 exposure share** | Sum of the ten largest policy insured values ÷ total portfolio insured value. | 14.0% (£347.4m) |
+| **Expiry trend** | Monthly count of policy expiry dates in 2021. | December: 92 policies |
 
-## 2. Underlying Data & Reporting Structure
-The source dataset contains one row per policy across ten distinct fields. The workbook contains dedicated reporting sheets (**Region**, **Business Type**, **Construction Type**, **Trend and KPI**, and a master **Dashboard** worksheet) built upon these core attributes:
+## 5 | Data sources, structure and preparation
 
-* **Record Identifier:** `Policy` — Used to count unique policy records.
-* **Time Field:** `Expiry` — Excel date field used for month-by-month expiry reporting.
-* **Financial Measure:** `InsuredValue` — Recorded value, aggregated as a financial sum.
-* **Segmentation:** `Region`, `State`, `Location`, `BusinessType`, `Construction`.
-* **Risk Indicators:** `Earthquake` and `Flood` — Y/N flags representing geographic risk characteristics.
+The source is an Excel table containing one row per policy and fields for policy identifier, expiry date, location, state, reporting region, insured value, construction, business type, earthquake indicator, flood indicator, premium and loss paid. The workbook includes supporting analysis tabs for region, coverage, business type, construction, expiry trends and KPIs.
 
----
+Three calculated columns extend the source table: Loss Ratio (paid loss ÷ premium), Exposure Combination (business type joined to construction) and Coverage Category (both, earthquake only, flood only or neither). This creates consistent reporting groups without changing the underlying policy records.
 
-## 3. Analytical Approach & Excel Techniques
+### Excel methods demonstrated
 
-### Data Preparation & Validation
-The analysis begins by establishing a structured policy table with consistent fields. The metrics reconcile policy counts and sums of insured value across all tables to confirm that the 500 records are distinct, populated, and fully balanced against the master portfolio total.
+| Technique / function | Purpose |
+| :--- | :--- |
+| **Excel Table and structured references** | Keep formulas linked to policy-level columns and support summaries. |
+| **IF and AND** | Classify the two Y/N coverage indicators into mutually exclusive groups. |
+| **Text concatenation (&)** | Combine business type and construction for exposure comparisons. |
+| **Division** | Calculate policy-level paid-loss-to-premium ratios. |
+| **PivotTables / distinct count** | Summarise policy count, insured value, premium, loss paid and distinct states. |
+| **GETPIVOTDATA** | Pull PivotTable summary values into KPI and coverage reporting areas. |
+| **PivotCharts and dashboard charts** | Present regional, coverage, construction and expiry patterns visually. |
 
-### Segment Aggregation & Calculations
-The portfolio is aggregated by volume (policy count) and financial exposure (`SUM` of insured values). Segment shares are calculated by dividing segment totals by the overall portfolio metrics. Equivalent logic for these workbook summaries includes standard conditional statistical functions:
-* `COUNTIF` / `COUNTIFS` — For evaluating policy volume and multi-criteria risk counts.
-* `SUMIF` / `SUMIFS` — For isolating financial exposure by specific categories or regions.
+## 6 | Analysis and Findings
 
-### Management Information Delivery
-The dashboard streamlines the path from high-level portfolio KPIs to granular segment tables. The primary horizontal distributions below illustrate the core financial concentrations identified in the workbook:
+### Exposure by region
 
-* **Insured Value by Region:** Highlights a heavy concentration in a single geographical area.
-* **Five Largest Business Types:** Isolates the top property sectors driving total exposure.
+The East region accounts for approximately 73.6% of total insured value, indicating high concentration in one reporting region. The remaining values are 18.9% Midwest, 5.6% Northeast and 2.0% Central.
 
----
+![Insured value by region](images/insured_value_by_region.png)
 
-## 4. Key Findings & Interpretation
+### Coverage mix and concentration
 
-* 📍 **Geographical Concentration:** The **East region** holds $1,826,021,818 in insured value, accounting for **73.6%** of the entire portfolio across 337 policies.
-* 🏢 **Business Mix:** **Apartment** properties represent the single largest concentration at $1,158,549,996 (**46.7%** of total value), followed by **Office Buildings** at $619,820,056.
-* 🏗️ **Construction Profile:** **Frame construction** is utilized in 322 out of 500 policies (**64.4%**), representing the dominant property type in the book.
-* 🌆 **Urban vs. Rural:** **81.0%** of the portfolio (405 policies) is classified as urban.
-* ⚠️ **Risk Indicators:** 256 policies carry an active **Earthquake flag (Y)** and 249 carry a **Flood flag (Y)**. 
+The coverage combination chart compares four mutually exclusive groups: both flood and earthquake, earthquake only, flood only, and neither. Comparing policy counts with total insured value shows where exposure is concentrated, rather than relying on policy volume alone.
 
-> 💡 **Note on Data Interpretation:** These risk flags represent baseline environmental exposure characteristics. They do not represent claim history, financial loss records, or active incident probabilities.
+**Key finding — coverage combination.** Although 47% of policies (235 of 500) have both flood and earthquake coverage indicators, they account for approximately 73.6% of the portfolio’s total insured value. In contrast, 46% of policies (230 of 500) have neither indicator and account for 21.6% of insured value.
 
----
+**Management implication.** Higher-value policies are disproportionately represented in the group with both coverage types. This makes the combined-coverage segment particularly important when reviewing insured-value concentration and potential exposure. Management can use the breakdown to prioritise further analysis by location, construction type and business category.
 
-## 5. Policy Expiry & Renewal Planning
-All recorded policy expiries in this baseline dataset take place within the 2021 calendar year. Grouping the dates by month maps the upcoming operational workload for renewal teams:
+![Insured value by coverage indicator](images/insured_value_by_coverage_indicator.png)
 
-* **Peak Volume:** **December** represents the highest renewal volume with 92 expiring policies, closely followed by **November** with 70.
-* **Low Volume:** **July** represents the lowest operational period with 0 expirations, followed by **August** with 9.
+### Premium and Loss Comparisons
 
-This timeline allows managers to balance underwriting capacity ahead of peak expiration cycles.
+The overall paid-loss ratio is 64.1%. Regional comparisons show material differences: approximately 60.3% East, 45.1% Midwest, 6.5% Central and 201.3% Northeast. The Northeast result indicates recorded paid losses exceeding premium within that group; which indicates a need for further investigation.
 
----
+### Top 10 Policy Exposures
 
-## 6. Data Quality & Reporting Controls
-Maintaining reliable management information depends on clear reconciliation paths back to the underlying data grain. 
+**Key finding.** The ten largest policies have a combined insured value of £347.4 million, accounting for approximately 14.0% of the £2.48 billion portfolio. The largest individual policy, Policy 100275 in Wisconsin, has an insured value of approximately £53.4 million.
 
-* **Population Auditing:** The workbook validates that summary metrics cleanly account for all 500 distinct policies, 10 states, and the complete $2,482,205,481 portfolio value.
-* **Filter Awareness & Variance:** Users should note that specific sheets isolate sub-populations. For example, the `Business Type` sheet focuses on the top five named categories (totalling $2,292,495,761) rather than all thirteen categories available in the master table ($2,482,205,481). Discrepancies like this highlight the importance of verifying denominators across reports.
-* **Data Integrity Checks:** Best practices implemented include auditing for duplicate policy IDs, checking date boundaries, standardizing text labels, and enforcing uniform `Y/N` boolean flags.
+![Top 10 policy exposures by insured value](images/top_10_policy_exposures.png)
 
----
+**Management implication.** Individual high-value policies contribute materially to total portfolio exposure. A relatively small number of policies therefore warrant closer examination alongside the wider regional and coverage concentration analysis.
 
-## 7. Skills & Competencies Demonstrated
-* **Data Preparation & Validation:** Verifying record completeness, identifying unique grains, and executing multi-tier metric reconciliations.
-* **Excel Portfolio Analysis:** Developing segment-level aggregations, KPI summaries, and categorical distribution matrixes.
-* **Performance Reporting:** Structuring policy volumes, financial exposures, category percentage shares, and time-series expiry patterns.
-* **Data Visualisation:** Designing intuitive chart models and dashboard layouts optimized for leadership review.
-* **Commercial Insight:** Translating raw insurance tables into actionable observations regarding risk concentration and operational peak periods.
+### Policy Expiry
 
----
+December has the highest recorded count (92), followed by November (70). KPI cards at the top of a dashboard allow users to read portfolio totals before exploring the breakdowns.
 
-## 8. Project Files & Reference Sources
-* 📁 **Source Workbook:** `Insurance Policies Data.xlsx` (Contains data, dashboards, and segment worksheets)
-* 📊 **Reconciliation Sheets:** Dedicated tabs for Region, Business Type, Construction Type, and Trend Analysis.
+## 7 | How the analysis answered the business questions
+
+| Business question | What the analysis established | Potential management use |
+| :--- | :--- | :--- |
+| **Exposure concentration** | East has 73.6% of insured value; apartment and frame categories also dominate. | Monitor exposure and review the balance of the portfolio. |
+| **Coverage distribution** | 47% of policies have both flood and earthquake cover and represent 73.6% of the total insured value. While 46% of policies have neither but account for 21.6% of insured value. Implication is that Higher-value policies are disproportionately represented with both coverage types. | Investigate the concentration of higher insured values among policies with both coverage indicators. |
+| **Premium and paid losses** | Overall paid-loss ratio is 64.1%, with strong regional variation. | Select regions and policies for further loss-data and underwriting review. |
+| **Expiry distribution** | December has 92 historical 2021 expiries. | Use the understanding of expiry distribution to support renewal planning. |
+| **Large individual exposures** | The ten largest policies account for £347.4m (14.0%) of insured value. Policy 100275 in Wisconsin is largest at £53.4m. | Review underwriting limits, risk characteristics and geographical concentration of large individual exposures, particularly where several high-value exposures occur in the same area or share similar construction or coverage characteristics. |
+
+## 8 | Data quality assurance and validation
+
+| Test | Approach | Excel Method | Documented result |
+| :--- | :--- | :--- | :--- |
+| **Uniqueness** | Compare total rows with distinct policy IDs; investigate repeated IDs before counting policies. | Validated primary key uniqueness by comparing total rows against distinct Policy IDs using `COUNT` and `COUNT(UNIQUE(...))` | 500 rows and 500 unique policy identifiers. |
+| **Completeness** | Check policy ID, premium, insured value, region and flood/earthquake fields for blanks. | Count blank cells (e.g. Insured Value and Premium) using `COUNTBLANK` or `COUNTIF`. | No blanks reported in those fields. |
+| **Completeness (Group Totals)** | Sum group counts and compare with the portfolio count of 500. | Used Pivot summaries | Regions: 337 East + 108 Midwest + 34 Northeast + 21 Central = 500. Coverage groups: 235 both + 230 neither + 21 earthquake only + 14 flood only = 500. |
+| **Consistency** | Recalculate sums from the policy table; compare with PivotTable and KPI outputs. | Used Pivot summaries | Insured value £2,482,205,481; premium £11,315,760.90; populated paid losses £7,249,785.94. |
+| **Validity** | Review negative or unusual insured values and premiums | Use `COUNTIF` to flag insured values or premiums `<= 0` | There were no negative or unusual values |
+| **Validity (Date Range)** | Confirm Expiry column contain valid dates, and all records fall between 1 Jan and 31 Dec 2021 | Used The `MIN` and `MAX` formula to determine the earliest and latest dates. | The date was between 02/01/2021 and 31/12/2021 |
+
+## 9 | Skills and competencies demonstrated
+
+* Data preparation and calculated fields
+* Excel structured tables
+* `IF`/`AND` logic
+* PivotTables and Pivot Charts
+* KPI definition and aggregation
+* Distinct-count and reconciliation checks
+* Segmented portfolio analysis
+* Clear visual selection
+
+### Project materials
+
+* **Project file:** `Insurance Policies Data 2.1.xlsx`

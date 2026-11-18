@@ -1,4 +1,4 @@
-# INSURANCE PORTFOLIO PERFORMANCE ANALYSIS
+<img width="268" height="145" alt="Policy Expiry" src="https://github.com/user-attachments/assets/ab3f659d-08e0-4f9a-9ab6-539fa5367ace" /># INSURANCE PORTFOLIO PERFORMANCE ANALYSIS
 
 Excel-based analysis of policy distribution, insured exposure, coverage indicators, premiums and paid losses for 2021 Policy Dataset
 
@@ -68,7 +68,8 @@ Three calculated columns extend the source table: Loss Ratio (paid loss ÷ premi
 
 The East region accounts for approximately 73.6% of total insured value, indicating high concentration in one reporting region. The remaining values are 18.9% Midwest, 5.6% Northeast and 2.0% Central.
 
-![Insured value by region](images/insured_value_by_region.png)
+<img width="269" height="144" alt="Exposure By Region" src="https://github.com/user-attachments/assets/c7d41c2b-6aa2-4d54-a67d-139d793dfed8" />
+
 
 ### Coverage mix and concentration
 
@@ -78,7 +79,7 @@ The coverage combination chart compares four mutually exclusive groups: both flo
 
 **Management implication.** Higher-value policies are disproportionately represented in the group with both coverage types. This makes the combined-coverage segment particularly important when reviewing insured-value concentration and potential exposure. Management can use the breakdown to prioritise further analysis by location, construction type and business category.
 
-![Insured value by coverage indicator](images/insured_value_by_coverage_indicator.png)
+<img width="305" height="146" alt="Coverage Combination" src="https://github.com/user-attachments/assets/2c1cfaa2-9318-4c80-b351-d2a47e12d72b" />
 
 ### Premium and Loss Comparisons
 
@@ -88,13 +89,16 @@ The overall paid-loss ratio is 64.1%. Regional comparisons show material differe
 
 **Key finding.** The ten largest policies have a combined insured value of £347.4 million, accounting for approximately 14.0% of the £2.48 billion portfolio. The largest individual policy, Policy 100275 in Wisconsin, has an insured value of approximately £53.4 million.
 
-![Top 10 policy exposures by insured value](images/top_10_policy_exposures.png)
+<img width="326" height="164" alt="Top 10 Exposures" src="https://github.com/user-attachments/assets/03e74a2a-60a0-4955-b1b9-fc573dd341dd" />
 
 **Management implication.** Individual high-value policies contribute materially to total portfolio exposure. A relatively small number of policies therefore warrant closer examination alongside the wider regional and coverage concentration analysis.
 
 ### Policy Expiry
 
 December has the highest recorded count (92), followed by November (70). KPI cards at the top of a dashboard allow users to read portfolio totals before exploring the breakdowns.
+
+<img width="268" height="145" alt="Policy Expiry" src="https://github.com/user-attachments/assets/fc6067ce-7348-4823-9f2d-cf1048e47c28" />
+
 
 ## 7 | How the analysis answered the business questions
 
